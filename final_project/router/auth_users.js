@@ -50,7 +50,7 @@ regd_users.post('/login', (req, res) => {
     return res.status(200).send('Logged in');
   } else {
     return res
-      .status(208)
+      .status(404)
       .json({ message: 'Invalid credentials. Check username and password' });
   }
 });
