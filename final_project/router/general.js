@@ -1,29 +1,43 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
-const session = require('express-session');
-const customer_routes = require('./router/auth_users.js').authenticated;
-const genl_routes = require('./router/general.js').general;
+let books = require("./booksdb.js");
+let isValid = require("./auth_users.js").isValid;
+let users = require("./auth_users.js").users;
+const public_users = express.Router();
 
-const app = express();
 
-app.use(express.json());
-
-app.use(
-  '/customer',
-  session({
-    secret: 'fingerprint_customer',
-    resave: true,
-    saveUninitialized: true,
-  })
-);
-
-app.use('/customer/auth/*', function auth(req, res, next) {
-  //Write the authenication mechanism here
+public_users.post("/register", (req,res) => {
+  //Write your code here
+  return res.status(300).json({message: "Yet to be implemented"});
 });
 
-const PORT = 5000;
+// Get the book list available in the shop
+public_users.get('/',function (req, res) {
+  //Write your code here
+  return res.status(300).json({message: "Yet to be implemented"});
+});
 
-app.use('/customer', customer_routes);
-app.use('/', genl_routes);
+// Get book details based on ISBN
+public_users.get('/isbn/:isbn',function (req, res) {
+  //Write your code here
+  return res.status(300).json({message: "Yet to be implemented"});
+ });
+  
+// Get book details based on author
+public_users.get('/author/:author',function (req, res) {
+  //Write your code here
+  return res.status(300).json({message: "Yet to be implemented"});
+});
 
-app.listen(PORT, () => console.log('Server is running'));
+// Get all books based on title
+public_users.get('/title/:title',function (req, res) {
+  //Write your code here
+  return res.status(300).json({message: "Yet to be implemented"});
+});
+
+//  Get book review
+public_users.get('/review/:isbn',function (req, res) {
+  //Write your code here
+  return res.status(300).json({message: "Yet to be implemented"});
+});
+
+module.exports.general = public_users;
