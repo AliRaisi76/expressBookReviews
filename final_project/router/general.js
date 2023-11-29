@@ -31,48 +31,49 @@ public_users.post('/register', (req, res) => {
 });
 
 // Get the book list available in the shop
-public_users.get('/', function (req, res) {
+public_users.get('/', async function (req, res) {
   //Write your code here
-  res.send(JSON.stringify(books, null, 4));
+  books = await JSON.stringify(books, null, 4);
+  res.send(books);
 });
 
 // Get book details based on ISBN
-public_users.get('/isbn/:isbn', function (req, res) {
+public_users.get('/isbn/:isbn', async function (req, res) {
   //Write your code here
   if (!req.params.isbn) {
     return res.status(404).json({
       message: 'Please provide an isbn',
     });
   }
-  const book = books.find((el) => el.isbn === req.params.isbn);
+  const book = await books.find((el) => el.isbn === req.params.isbn);
   return res
     .status(300)
     .json({ message: 'Book found with the isbn provided!', data: book });
 });
 
 // Get book details based on author
-public_users.get('/author/:author', function (req, res) {
+public_users.get('/author/:author', async function (req, res) {
   //Write your code here
   if (!req.params.author) {
     return res.status(404).json({
       message: 'Please provide an author',
     });
   }
-  const book = books.find((el) => el.author === req.params.author);
+  const book = await books.find((el) => el.author === req.params.author);
   return res
     .status(300)
     .json({ message: 'Book found with the author name provided!', data: book });
 });
 
 // Get all books based on title
-public_users.get('/title/:title', function (req, res) {
+public_users.get('/title/:title', async function (req, res) {
   //Write your code here
   if (!req.params.title) {
     return res.status(404).json({
       message: 'Please provide a title',
     });
   }
-  const book = books.find((el) => el.title === req.params.title);
+  const book = await books.find((el) => el.title === req.params.title);
   return res
     .status(300)
     .json({ message: 'Book found with the title provided!', data: book });
